@@ -62,8 +62,55 @@ def gender_male():
 def gender_female():
     return "female"
 
+# НЫТЬЁ: хочу, чтобы было так: один файл с тестом - один конфтест.
+# уже сейчас в одном конфтесте неудобно искать нужные фикстуры.
+# пишу комменты, чтобы хоть как-то их различать. И что вы мне сделаете)))
 
+# FOR test_five_title
 @pytest.fixture
 def random_symbols():
     return "4w5rgt"
 
+
+@pytest.fixture
+def title_1():
+    return 'THIS IS TITLE'
+
+@pytest.fixture
+def copy_title_1(title_1):
+    return "Copy of " + title_1
+
+@pytest.fixture
+def digit_for_title():
+    return 17
+
+@pytest.fixture
+def title_2(digit_for_title):
+    return 'Copy of something(' + str(digit_for_title) + ')'
+
+@pytest.fixture
+def copy_title_2(digit_for_title):
+    return 'Copy of (' + str(digit_for_title + 1) + ')'
+
+@pytest.fixture
+def title_3(digit_for_title):
+    return 'Copy of something (' + str(digit_for_title) + ')'
+
+@pytest.fixture
+def copy_title_3(digit_for_title):
+    return 'Copy of something (' + str(digit_for_title + 1) + ')'
+
+@pytest.fixture
+def not_digit_for_title():
+    return '1fvd7'
+
+# Вопрос: есть ли варианты как-то оптимизировать постоянное дублирование 
+# очень похожих по смыслу фикстур?
+# title_3 и title_4 здесь практически одинаковы(
+@pytest.fixture
+def title_4(not_digit_for_title):
+    return 'Copy of something(' + str(not_digit_for_title) + ')'
+
+@pytest.fixture
+def copy_title_4(not_digit_for_title):
+    return 'Copy of something(' + str(not_digit_for_title) + ') (2)'
