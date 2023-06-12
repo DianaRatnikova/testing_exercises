@@ -2,32 +2,35 @@ from functions.level_1_5.one_median import get_median_value
 import pytest
 
 
-
 @pytest.mark.parametrize(
   "items, expected_result",
   [
-      ('', None),
-      ([2, 1, 5], 5),
-      ([-2, -1, 5], 5),
-      ([2, 1, 3, 9, 10], 9),
-      ([2, 1, 1, 1, 3, 3, 2, 9, 9, 3, 9, 10], 9),
-      ([0.6, 99.4, 13.2],  13.2),
+      ('items_empty', 'result_none'),
+      ('items_1', 'result_1_2'),
+      ('items_2', 'result_1_2'),
+      ('items_3', 'result_3_4'),
+      ('items_4', 'result_3_4'),
+      ('items_5', 'result_5')
   ]      
 )
-def test__get_median__is_valid(items, expected_result):
+def test__get_median__is_valid(items, expected_result, request):
+    items = request.getfixturevalue(items)
+    expected_result = request.getfixturevalue(expected_result)
     assert get_median_value(items) is expected_result
+
 
 @pytest.mark.parametrize(
   "items, expected_error, items_need",
   [
-       (0, TypeError, 0),
-       ([2, 1, 3, 9], IndexError, 1),
-       (1, TypeError, 1),
+       ('items_error_1', TypeError, False),
+       ('items_error_2', IndexError, True),
+       ('items_error_3', TypeError, True)
   ]
 )
-def test__get_median_value__errors(items, expected_error, items_need):
+def test__get_median_value__errors(items, expected_error, items_need, request):
+    items = request.getfixturevalue(items)
     with pytest.raises(expected_error):
-        if items_need == 1:
+        if items_need:
             get_median_value(items)
         else:
             get_median_value()
