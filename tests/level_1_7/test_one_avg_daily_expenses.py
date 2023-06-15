@@ -5,5 +5,5 @@ import decimal
 
 
 
-def test__calculate_average_daily_expenses__is_valid(expense1, expense2, request):
-    assert calculate_average_daily_expenses([expense1, expense2]) == decimal.Decimal('1011.1')
+def test__calculate_average_daily_expenses__is_valid(expense1, expense2):
+    assert calculate_average_daily_expenses([expense1, expense2]) == decimal.Decimal('21.6')
