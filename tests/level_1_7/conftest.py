@@ -39,3 +39,13 @@ def expense2(amount, card, spent_at):
                    spent_in="Shop2", 
                    spent_at=spent_at, 
                    category=ExpenseCategory("THEATRES_MOVIES_CULTURE"))
+
+
+@pytest.fixture
+def expense3(amount, card, spent_at, julius):
+    return Expense(amount=amount, 
+                       currency=Currency("USD"), 
+                       card = card, 
+                       spent_in='htg.julis.52t4w5.,/.FFFF', 
+                       spent_at=spent_at, 
+                       category=ExpenseCategory("BAR_RESTAURANT"))
