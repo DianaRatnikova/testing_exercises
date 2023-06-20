@@ -19,9 +19,9 @@ import pytest
 )
 def test__first__is_valid(items, default, expected_result, items_need):
     if items_need == 1:
-        assert first(items, default) is expected_result
+        assert first(items, default) == expected_result
     else:
-        assert first(default) is expected_result
+        assert first(default) == expected_result
 
 @pytest.mark.parametrize(
   "items, default, expected_error, items_need, default_need",
