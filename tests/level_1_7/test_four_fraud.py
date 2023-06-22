@@ -8,31 +8,15 @@ def test__find_fraud_expenses__empty_list():
     assert find_fraud_expenses([]) == []
 
 
-def test__find_fraud_expenses__one_expense():
-    expense1 = Expense(
-        amount=decimal.Decimal('10.8'), 
-        currency=Currency("USD"), 
-        card = BankCard(last_digits='234', owner="John"), 
-        spent_in="green apple", 
-        spent_at=datetime.datetime(2005, 1, 14),
-        category=ExpenseCategory("SUPERMARKET"))
-    assert find_fraud_expenses([expense1]) == []
+def test__find_fraud_expenses__one_expense(expense_four_1):
+    assert find_fraud_expenses([expense_four_1]) == []
+
+def test__find_fraud_expenses__many_expenses_with_bad_spent_in(expense_four_1):
+    assert find_fraud_expenses([expense_four_1]*10) == []
+
+def test__find_fraud_expenses__big_amount(expense_four_1, expense_four_2):
+    assert find_fraud_expenses([expense_four_1, expense_four_2]) == []   
 
 
-def test__find_fraud_expenses__big_amount():
-    expense1 = Expense(
-        amount=decimal.Decimal('7000001'), 
-        currency=Currency("USD"), 
-        card = BankCard(last_digits='234', owner="John"), 
-        spent_in="green apple", 
-        spent_at=datetime.datetime(2005, 1, 14),
-        category=ExpenseCategory("SUPERMARKET"))
-    
-    expense2 = Expense(
-        amount=decimal.Decimal('50001'), 
-        currency=Currency("USD"), 
-        card = BankCard(last_digits='234', owner="John"), 
-        spent_in="green apple", 
-        spent_at=datetime.datetime(2005, 1, 14),
-        category=ExpenseCategory("SUPERMARKET"))
-    assert find_fraud_expenses([expense1, expense2]) == []   
+def test__find_fraud_expenses__many_expenses(expense_four_3):
+    assert find_fraud_expenses([expense_four_3]*3) == [expense_four_3]*3
