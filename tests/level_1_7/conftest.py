@@ -6,7 +6,7 @@ import datetime
 
 
 @pytest.fixture
-def expense_four_1():
+def expense_small_amount():
     return Expense(
             amount=decimal.Decimal('10.8'), 
             currency=Currency("USD"), 
@@ -14,11 +14,11 @@ def expense_four_1():
             spent_in="green apple", 
             spent_at=datetime.datetime(2005, 1, 14),
             category=ExpenseCategory("SUPERMARKET")
-            )
+        )
 
 
 @pytest.fixture
-def expense_four_2():
+def expense_four_big_amount():
     return Expense(
             amount=decimal.Decimal('50000'), 
             currency=Currency("USD"), 
@@ -26,11 +26,11 @@ def expense_four_2():
             spent_in="green apple", 
             spent_at=datetime.datetime(2005, 1, 14),
             category=ExpenseCategory("SUPERMARKET")
-            )
+        )
 
 
 @pytest.fixture
-def expense_four_3():
+def expense_spend_in_is_equal_to_spent_at():
     return Expense(
             amount=decimal.Decimal('500'), 
             currency=Currency("USD"), 
@@ -38,4 +38,4 @@ def expense_four_3():
             spent_in=datetime.datetime(2005, 2, 14), 
             spent_at=datetime.datetime(2005, 2, 14),
             category=ExpenseCategory("SUPERMARKET")
-            )
+        )
