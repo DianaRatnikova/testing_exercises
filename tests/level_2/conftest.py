@@ -3,12 +3,12 @@ from functions.level_2.two_students import Student
 
 
 @pytest.fixture
-def name():
+def name_with_brakets():
     return("{ Something }")
 
 @pytest.fixture
-def result1(name):
-   return name[2:len(name) - 2]
+def result1(name_with_brakets):
+   return name_with_brakets[2:len(name_with_brakets) - 2]
 
 @pytest.fixture
 def name2():
