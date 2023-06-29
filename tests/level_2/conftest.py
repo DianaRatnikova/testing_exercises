@@ -3,22 +3,6 @@ from functions.level_2.two_students import Student
 
 
 @pytest.fixture
-def name():
-    return("{ Something }")
-
-@pytest.fixture
-def result1(name):
-   return name[2:len(name) - 2]
-
-@pytest.fixture
-def name2():
-    return("{ Something }")
-
-@pytest.fixture
-def result2():
-    return "Something"
-
-@pytest.fixture
 def student1():
     return Student("Diana", "Ratnikova", "@winterlich_weiss")
 
