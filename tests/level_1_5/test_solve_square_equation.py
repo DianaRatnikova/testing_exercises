@@ -5,37 +5,40 @@ import pytest
 @pytest.mark.parametrize(
   "square_coefficient, linear_coefficient, const_coefficient, expected_results",
       [
-      (0, 0, 0, (None, None)),
-      (5, 2, 0, (-0.4, 0.0)),
-      (0, 2, 10,(-5.0, None)),
-      (0, 2, 0, (0.0, None)),
-      (4, 0, -16, (-2.0, 2.0)),
-      (5, 3, -26, (-2.6, 2.0)),
-      (1, 2, 5, (None, None)),
-      (1.1, 2.2, -5.5, (-3.449489742783178, 1.4494897427831779)),
+      ('square_coefficient_1', 'square_coefficient_1', 'square_coefficient_1', 'square_result_1'),
+      ('square_coefficient_2', 'linear_coefficient_2', 'square_coefficient_1', 'square_result_2'),
+      ('square_coefficient_1', 'linear_coefficient_2', 'const_coefficient_1', 'square_result_3'),
+      ('square_coefficient_1', 'linear_coefficient_2', 'square_coefficient_1', 'square_result_4'),
+      ('square_coefficient_3', 'square_coefficient_1',  'const_coefficient_2', 'square_result_5'),
+      ('square_coefficient_2', 'linear_coefficient_3', 'const_coefficient_3', 'square_result_6'),
+      ('square_coefficient_4', 'linear_coefficient_2', 'square_coefficient_2', 'square_result_1'),
+      ('square_coefficient_5', 'linear_coefficient_4', 'const_coefficient_4', 'square_result_7'),
   ]      
 
 )
-
-def test__solve_square_equation__is_valid(square_coefficient, linear_coefficient, const_coefficient, expected_results):
+def test__solve_square_equation__is_valid(square_coefficient, linear_coefficient, const_coefficient, expected_results, request):
+    square_coefficient = request.getfixturevalue(square_coefficient)
+    linear_coefficient = request.getfixturevalue(linear_coefficient)
+    const_coefficient = request.getfixturevalue(const_coefficient)
+    expected_results = request.getfixturevalue(expected_results)
     assert solve_square_equation(square_coefficient, linear_coefficient, const_coefficient) == expected_results
 
 
-def test__solve_square_equation__not_enougt_params():
+def test__solve_square_equation__not_enougt_params(square_coefficient_1):
     with pytest.raises(TypeError):
-        solve_square_equation(0, 0)
+        solve_square_equation(square_coefficient_1, square_coefficient_1)
 
 
-def test__solve_square_equation__too_many_params():
+def test__solve_square_equation__too_many_params(square_coefficient_2, linear_coefficient_2, square_coefficient_1):
     with pytest.raises(TypeError):
-        solve_square_equation(5, 2, 0, 9)
+        solve_square_equation(square_coefficient_2, linear_coefficient_2, square_coefficient_1, 9)
 
 
-def test__solve_square_equation__params_are_string():
+def test__solve_square_equation__params_are_string(square_coefficient_6, linear_coefficient_5, const_coefficient_5):
     with pytest.raises(TypeError):
-        solve_square_equation('a', 'b', 'c')
+        solve_square_equation(square_coefficient_6, linear_coefficient_5, const_coefficient_5)
 
 
-def test__solve_square_equation__params_are_lists():
+def test__solve_square_equation__params_are_lists(square_coefficient_7):
     with pytest.raises(TypeError):
-        solve_square_equation([0], [0], [0])
+        solve_square_equation(square_coefficient_7, square_coefficient_7, square_coefficient_7)
